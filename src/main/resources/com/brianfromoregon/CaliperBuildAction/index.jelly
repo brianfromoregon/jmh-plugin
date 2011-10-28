@@ -1,12 +1,63 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout"
-         xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+         xmlns:t="/lib/hudson" xmlns:f="/lib/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="jelly:core ">
     <l:layout>
         <st:include it="${it.build}" page="sidepanel.jelly"/>
         <l:main-panel>
-
-            <j:forEach items="${it.results}" var="i">
-                <p>${i.toString()}</p>
-            </j:forEach>
+            <h1>
+                <img src="/plugin/caliper-ci/caliper.png" alt="" height="48" width="48"/>
+                Caliper Memory Results
+            </h1>
+            <table id="memresults" class="sortable pane bigtable">
+                <tr>
+                    <th initialSortDir="down">Name</th>
+                    <th>Parameters</th>
+                    <th>Objects</th>
+                    <th>Bytes</th>
+                </tr>
+                <j:forEach var="r" items="${it.scenarioMemoryResultChanges}">
+                    <tr>
+                        <td class="pane">${r.benchmarkName}</td>
+                        <td class="pane">${r.scenario}</td>
+                        <j:choose>
+                            <j:when test="${r.instancesType.toString().equals('WORSE')}">
+                                <td class="pane" bgcolor="#FFEEEE">${r.instancesString}</td>
+                            </j:when>
+                            <j:when test="${r.instancesType.toString().equals('BETTER')}">
+                                <td class="pane" bgcolor="#EEFFEE">${r.instancesString}</td>
+                            </j:when>
+                            <j:otherwise>
+                                <td class="pane">${r.instancesString}</td>
+                            </j:otherwise>
+                        </j:choose>
+                        <j:choose>
+                            <j:when test="${r.bytesType.toString().equals('WORSE')}">
+                                <td class="pane" bgcolor="#FFEEEE">${r.bytesString}</td>
+                            </j:when>
+                            <j:when test="${r.bytesType.toString().equals('BETTER')}">
+                                <td class="pane" bgcolor="#EEFFEE">${r.bytesString}</td>
+                            </j:when>
+                            <j:otherwise>
+                                <td class="pane">${r.bytesString}</td>
+                            </j:otherwise>
+                        </j:choose>
+                    </tr>
+                </j:forEach>
+            </table>
+            <p style="padding-top: 2em;">
+                <ul>
+                    <li>Where are the timing results? I haven't tackled those yet...</li>
+                    <st:nbsp/>
+                    <li>Would you rather see these results looking
+                        <a href="http://microbenchmarks.appspot.com/run/jessewilson@google.com/examples.ArraySortBenchmark">
+                            like this?
+                        </a>
+                        Yeah,
+                        <a href="http://code.google.com/p/caliper-ci/issues/detail?id=1">me too!</a>
+                        Come help make it happen :)
+                    </li>
+                </ul>
+            </p>
         </l:main-panel>
     </l:layout>
 </j:jelly>

@@ -1,35 +1,23 @@
   Caliper CI
 
   1.0 features
-  -- Jenkins plugin, but abstracted a reasonable amount
-  -- Store all data as JSON
-  -- After build, update threshold (lower or higher!)
+  -- Jenkins plugin
+  -- Store all data as JSON in builds
+  -- Color results table
 
-  Post-1.0 features
+  1.x features
+  -- unit names
+  -- show environment
+  -- proper unit tests
+
+  Beyond...
   -- Compare other measurement types like timing. This requires looking at the environment (builds can run on slaves)
      and dealing with non-dedicated machines.
   -- Port appspot UI: http://microbenchmarks.appspot.com/run/jessewilson@google.com/examples.ArraySortBenchmark/1097001
+     * Early analysis says its do-able to deliver trimmed-down GWT app as Jenkins plugin, with app engine
+       backend swapped out for jenkins build history.
   -- Other CI tools
   -- Tunable threshold, tolerance
   -- Charts
   -- Option to find and store code
 
-  UI
-  -- input, search strategy for results file
-  -- output, (1) fail build (2) caliper link with logo like Git here: http://ci.jenkins-ci.org/job/jenkins_lts_branch/lastSuccessfulBuild/
-
-Build time
-  1. given, a "dir" and search strategy for results files
-  2. find files, interpret as results. any issues, report on console output as warnings.
-  3. load thresholds for relevant tests (from JSON)
-  4. store new tests (in JSON)
-  5. unstable build if things are worse
-
-Show caliper info on job page
-  1. given job number
-  2. output number of parsed measurements (5 instance, 5 memory) and number of violated (3 failures) and link to details
-
-Click on caliper jenkins link
-  1. given, job number
-  2. output a table. row is test name. columns are instance,memory,json. cells show new and old values. cells are red bg
-     if its worse, green bg if better, white bg if same

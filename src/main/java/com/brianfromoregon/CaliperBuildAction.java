@@ -1,18 +1,17 @@
 package com.brianfromoregon;
 
-import com.google.caliper.Json;
-import com.google.caliper.Result;
+import com.google.caliper.*;
 import com.google.common.collect.Lists;
 import com.google.gson.JsonSyntaxException;
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * TODO: sad that I'm storing AbstractBuild for jelly, gotta be a better way
  * TODO: is this slave friendly?
  */
 public class CaliperBuildAction implements Action {
@@ -20,8 +19,11 @@ public class CaliperBuildAction implements Action {
     private final String[] jsonResults;
     public final AbstractBuild<?, ?> build;
 
-    private transient List<Result> results;
+    private transient BuildResults results;
 
+    /**
+     * Each of the supplied JSON results must carry at least one MeasurementType of MEMORY or INSTANCE.
+     */
     public CaliperBuildAction(String[] jsonResults, AbstractBuild<?, ?> build) {
         this.jsonResults = jsonResults;
         this.build = build;
@@ -29,24 +31,33 @@ public class CaliperBuildAction implements Action {
         initResults();
     }
 
-    private void initResults() {
-        results = Lists.newArrayList();
-        for (String r : jsonResults) {
-            try {
-                results.add(Json.getGsonInstance().fromJson(r, Result.class));
-            } catch (JsonSyntaxException e) {
-                LOGGER.log(Level.SEVERE, "Could not parse Caliper result file as JSON, skipping", e);
+    /**
+     * For index.jelly
+     */
+    public Iterable<ScenarioMemoryResultChange> getScenarioMemoryResultChanges() {
+        return getMemoryResultDifference().getChanges(EnumSet.complementOf(EnumSet.of(ScenarioMemoryResultChange.Type.NO_RESULT)));
+    }
+
+    /**
+     * For summary.jelly
+     */
+    public String getSummary() {
+        return getMemoryResultDifference().getSummary();
+    }
+
+    public BuildMemoryResultDifference getMemoryResultDifference() {
+        BuildResults prevResults = null;
+        {
+            AbstractBuild<?, ?> prevBuild = this.build.getPreviousBuiltBuild();
+            if (prevBuild != null) {
+                CaliperBuildAction prevAction = prevBuild.getAction(CaliperBuildAction.class);
+                if (prevAction != null) {
+                    prevResults = prevAction.results;
+                }
             }
         }
-    }
-
-    private Object readResolve() {
-        initResults();
-        return this;
-    }
-
-    public List<Result> getResults() {
-        return results;
+        
+        return new BuildMemoryResultDifference(prevResults, results);
     }
 
     @Override
@@ -62,5 +73,22 @@ public class CaliperBuildAction implements Action {
     @Override
     public String getUrlName() {
         return "caliper";
+    }
+
+    private void initResults() {
+        List<Result> caliperResults = Lists.newArrayList();
+        for (String r : jsonResults) {
+            try {
+                caliperResults.add(Json.getGsonInstance().fromJson(r, Result.class));
+            } catch (JsonSyntaxException e) {
+                LOGGER.log(Level.SEVERE, "Could not parse Caliper result file as JSON, skipping", e);
+            }
+        }
+        results = new BuildResults(caliperResults);
+    }
+
+    private Object readResolve() {
+        initResults();
+        return this;
     }
 }

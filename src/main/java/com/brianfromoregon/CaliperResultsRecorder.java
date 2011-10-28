@@ -1,18 +1,17 @@
 package com.brianfromoregon;
 
-import com.google.caliper.Json;
+import com.google.caliper.*;
 import com.google.caliper.Result;
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.io.CharStreams;
 import com.google.gson.JsonParseException;
 import hudson.Extension;
 import hudson.FilePath;
 import hudson.Launcher;
-import hudson.model.AbstractBuild;
-import hudson.model.AbstractProject;
-import hudson.model.BuildListener;
+import hudson.model.*;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Publisher;
@@ -21,8 +20,10 @@ import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,23 +50,48 @@ public class CaliperResultsRecorder extends Recorder {
 
         List<ParsedFile> jsonResults = readUtf8Results(build);
 
+        if (jsonResults.size() == 0) {
+            listener.error("No matching file found. Configuration error?");
+            return false;
+        }
+
+        List<Result> results = Lists.newArrayList();
         Iterator<ParsedFile> it = jsonResults.iterator();
         while (it.hasNext()) {
             ParsedFile f = it.next();
             try {
                 Result result = Json.getGsonInstance().fromJson(f.content, Result.class);
-                if (result == null || result.getEnvironment() == null || result.getRun() == null) {
+                if (result == null || result.getRun() == null) {
                     LOGGER.log(Level.WARNING, "JSON does not convert to a Result, skipping: " + f.name);
                     it.remove();
+                    continue;
                 }
+
+                // Verify it has at least some memory results
+                boolean hasMemoryResults = false;
+                for (ScenarioResult r : result.getRun().getMeasurements().values()) {
+                    if (r.getMeasurementSet(MeasurementType.INSTANCE) != null || r.getMeasurementSet(MeasurementType.MEMORY) != null) {
+                        hasMemoryResults = true;
+                        break;
+                    }
+                }
+                if (!hasMemoryResults) {
+                    LOGGER.log(Level.WARNING, "Result does not have any memory measurements, skipping: " + f.name);
+                    it.remove();
+                    continue;
+                }
+
+                results.add(result);
+
             } catch (JsonParseException e) {
                 LOGGER.log(Level.WARNING, "Could not parse file as JSON, skipping: " + f.name, e);
                 it.remove();
+                continue;
             }
         }
 
-        if (jsonResults.size() == 0) {
-            listener.error("No matching file found. Configuration error?");
+        if (results.size() == 0) {
+            listener.error("No useful result files kept. Configuration error?");
             return false;
         }
 
@@ -121,7 +147,14 @@ public class CaliperResultsRecorder extends Recorder {
     }
 
     void addBuildAction(AbstractBuild<?, ?> build, List<String> jsonResults) {
-        build.addAction(new CaliperBuildAction(jsonResults.toArray(new String[jsonResults.size()]), build));
+        CaliperBuildAction action = new CaliperBuildAction(jsonResults.toArray(new String[jsonResults.size()]), build);
+        build.addAction(action);
+
+        Iterable<ScenarioMemoryResultChange> regressions = action.getMemoryResultDifference().getChanges(EnumSet.of(ScenarioMemoryResultChange.Type.WORSE));
+        
+        if (!Iterables.isEmpty(regressions)) {
+            build.setResult(hudson.model.Result.UNSTABLE);
+        }
     }
 
 }
