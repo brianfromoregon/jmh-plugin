@@ -62,7 +62,7 @@ public class CaliperResultsRecorder extends Recorder {
             try {
                 Result result = Json.getGsonInstance().fromJson(f.content, Result.class);
                 if (result == null || result.getRun() == null) {
-                    LOGGER.log(Level.WARNING, "JSON does not convert to a Result, skipping: " + f.name);
+                    listener.getLogger().println("JSON does not convert to a Result, skipping: " + f.name);
                     it.remove();
                     continue;
                 }
@@ -76,7 +76,7 @@ public class CaliperResultsRecorder extends Recorder {
                     }
                 }
                 if (!hasMemoryResults) {
-                    LOGGER.log(Level.WARNING, "Result does not have any memory measurements, skipping: " + f.name);
+                    listener.getLogger().println("Result does not have any memory measurements, skipping: " + f.name);
                     it.remove();
                     continue;
                 }
@@ -84,6 +84,7 @@ public class CaliperResultsRecorder extends Recorder {
                 results.add(result);
 
             } catch (JsonParseException e) {
+                listener.getLogger().println("Could not parse file as JSON (see logs for details), skipping: " + f.name);
                 LOGGER.log(Level.WARNING, "Could not parse file as JSON, skipping: " + f.name, e);
                 it.remove();
                 continue;

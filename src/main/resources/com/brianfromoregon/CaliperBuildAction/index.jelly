@@ -11,42 +11,42 @@
             <table id="memresults" class="sortable pane bigtable">
                 <tr>
                     <th initialSortDir="down">Name</th>
-                    <th>Parameters</th>
-                    <th>Objects</th>
                     <th>Bytes</th>
+                    <th>Objects</th>
+                    <th>Parameters</th>
                 </tr>
                 <j:forEach var="r" items="${it.scenarioMemoryResultChanges}">
                     <tr>
-                        <td class="pane">${r.benchmarkName}</td>
-                        <td class="pane">${r.scenario}</td>
-                        <j:choose>
-                            <j:when test="${r.instancesType.toString().equals('WORSE')}">
-                                <td class="pane" bgcolor="#FFEEEE">${r.instancesString}</td>
-                            </j:when>
-                            <j:when test="${r.instancesType.toString().equals('BETTER')}">
-                                <td class="pane" bgcolor="#EEFFEE">${r.instancesString}</td>
-                            </j:when>
-                            <j:otherwise>
-                                <td class="pane">${r.instancesString}</td>
-                            </j:otherwise>
-                        </j:choose>
+                        <td height="16px" class="pane">${r.benchmarkName}</td>
                         <j:choose>
                             <j:when test="${r.bytesType.toString().equals('WORSE')}">
-                                <td class="pane" bgcolor="#FFEEEE">${r.bytesString}</td>
+                                <td height="16px" class="pane"><img src="${imagesURL}/16x16/red.gif" />${r.bytesString}</td>
                             </j:when>
                             <j:when test="${r.bytesType.toString().equals('BETTER')}">
-                                <td class="pane" bgcolor="#EEFFEE">${r.bytesString}</td>
+                                <td height="16px" class="pane"><img src="${imagesURL}/16x16/blue.gif" />${r.bytesString}</td>
                             </j:when>
                             <j:otherwise>
-                                <td class="pane">${r.bytesString}</td>
+                                <td height="16px" class="pane">${r.bytesString}</td>
                             </j:otherwise>
                         </j:choose>
+                        <j:choose>
+                            <j:when test="${r.instancesType.toString().equals('WORSE')}">
+                                <td height="16px" class="pane"><img src="${imagesURL}/16x16/red.gif" />${r.instancesString}</td>
+                            </j:when>
+                            <j:when test="${r.instancesType.toString().equals('BETTER')}">
+                                <td height="16px" class="pane"><img src="${imagesURL}/16x16/blue.gif" />${r.instancesString}</td>
+                            </j:when>
+                            <j:otherwise>
+                                <td height="16px" class="pane">${r.instancesString}</td>
+                            </j:otherwise>
+                        </j:choose>
+                        <td height="16px" class="pane">${r.scenario}</td>
                     </tr>
                 </j:forEach>
             </table>
             <p style="padding-top: 2em;">
                 <ul>
-                    <li>Where are the timing results? I haven't tackled those yet...</li>
+                    <li>Where are the timing results? I <a href="http://code.google.com/p/caliper-ci/issues/detail?id=5">haven't tackled those</a> yet...</li>
                     <st:nbsp/>
                     <li>Would you rather see these results looking
                         <a href="http://microbenchmarks.appspot.com/run/jessewilson@google.com/examples.ArraySortBenchmark">
