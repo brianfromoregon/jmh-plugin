@@ -6,18 +6,20 @@
         <l:main-panel>
             <h1>
                 <img src="/plugin/caliper-ci/caliper.png" alt="" height="48" width="48"/>
-                Caliper Memory Results
+                Caliper Results
             </h1>
-            <table id="memresults" class="sortable pane bigtable">
+            <table class="sortable pane bigtable">
                 <tr>
                     <th initialSortDir="down">Name</th>
+                    <th>Time</th>
                     <th>Bytes</th>
                     <th>Objects</th>
                     <th>Parameters</th>
                 </tr>
-                <j:forEach var="r" items="${it.scenarioMemoryResultChanges}">
+                <j:forEach var="r" items="${it.scenarioResultChanges}">
                     <tr>
                         <td height="16px" class="pane">${r.benchmarkName}</td>
+                        <td height="16px" class="pane">${r.timeString}</td>
                         <j:choose>
                             <j:when test="${r.bytesType.toString().equals('WORSE')}">
                                 <td height="16px" class="pane"><img src="${imagesURL}/16x16/red.gif" />${r.bytesString}</td>
@@ -46,7 +48,7 @@
             </table>
             <p style="padding-top: 2em;">
                 <ul>
-                    <li>Where are the timing results? I <a href="http://code.google.com/p/caliper-ci/issues/detail?id=5">haven't tackled those</a> yet...</li>
+                    <li>Why don't timing results fail the build? That's coming, follow progress <a href="http://code.google.com/p/caliper-ci/issues/detail?id=5">in this issue</a>.</li>
                     <st:nbsp/>
                     <li>Would you rather see these results looking
                         <a href="http://microbenchmarks.appspot.com/run/jessewilson@google.com/examples.ArraySortBenchmark">
@@ -54,7 +56,6 @@
                         </a>
                         Yeah,
                         <a href="http://code.google.com/p/caliper-ci/issues/detail?id=1">me too!</a>
-                        Come help make it happen :)
                     </li>
                 </ul>
             </p>
