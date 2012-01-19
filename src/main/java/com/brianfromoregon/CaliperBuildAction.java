@@ -5,11 +5,15 @@ import com.google.caliper.Result;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.gson.JsonSyntaxException;
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
+import hudson.util.Graph;
+import org.kohsuke.stapler.Stapler;
 
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +26,7 @@ public class CaliperBuildAction implements Action {
     public final AbstractBuild<?, ?> build;
 
     private transient BuildResults results;
+    private transient Map<Integer, ScenarioTrend> trendsById;
 
     public CaliperBuildAction(String[] jsonResults, AbstractBuild<?, ?> build) {
         this.jsonResults = jsonResults;
@@ -40,6 +45,10 @@ public class CaliperBuildAction implements Action {
                 return input.getTimeType() != ScenarioResultChange.Type.NO_RESULT;
             }
         });
+    }
+
+    public Iterable<ScenarioTrend> getScenarioTrends() {
+        return trendsById.values();
     }
 
     /**
@@ -75,6 +84,10 @@ public class CaliperBuildAction implements Action {
         return new BuildResultDifference(prevResults, results);
     }
 
+    public BuildResults getResults() {
+        return results;
+    }
+
     @Override
     public String getIconFileName() {
         return "/plugin/caliper-ci/caliper.png";
@@ -90,6 +103,17 @@ public class CaliperBuildAction implements Action {
         return "caliper";
     }
 
+    public Graph getTimingTrendGraph() {
+        int id;
+        try {
+            id = Integer.parseInt(Stapler.getCurrentRequest().getParameter(("id")));
+        } catch (NumberFormatException e) {
+            LOGGER.log(Level.WARNING, "Could not parse graph request id as int", e);
+            return null;
+        }
+        return trendsById.get(id).createGraph();
+    }
+
     private void initResults() {
         List<Result> caliperResults = Lists.newArrayList();
         for (String r : jsonResults) {
@@ -100,6 +124,11 @@ public class CaliperBuildAction implements Action {
             }
         }
         results = new BuildResults(caliperResults);
+        trendsById = Maps.newHashMap();
+        int id = 0;
+        for (ScenarioKey key : results.getScenarios().keySet()) {
+            trendsById.put(id, new ScenarioTrend(key, build, id++));
+        }
     }
 
     private Object readResolve() {

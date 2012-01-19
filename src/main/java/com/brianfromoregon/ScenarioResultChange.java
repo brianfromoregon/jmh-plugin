@@ -143,7 +143,7 @@ public class ScenarioResultChange {
                 return "";
             case NEW_RESULT:
             case SAME:
-                return formatTime(getNewNanos());
+                return SubSecond.finestFor(getNewNanos()).format(getNewNanos());
             default:
                 double pct = Math.abs(getNewNanos() / getOldNanos() - 1);
                 String direction;
@@ -151,7 +151,7 @@ public class ScenarioResultChange {
                     direction = "up";
                 else
                     direction = "down";
-                return String.format("%s (%s %s%%)", formatTime(getNewNanos()), direction, new DecimalFormat("0.0").format(pct * 100));
+                return String.format("%s (%s %s%%)", SubSecond.finestFor(getNewNanos()).format(getNewNanos()), direction, new DecimalFormat("0.0").format(pct * 100));
         }
     }
 
@@ -169,27 +169,4 @@ public class ScenarioResultChange {
         return scenarioKey.getScenario().getVariables();
     }
 
-    static String formatTime(double nanos) {
-        double step = nanos;
-        int n = 0;
-        for (; step >= 1000 && n < 3; n++)
-            step /= 1000d;
-
-        String unit;
-        switch (n) {
-            case 0:
-                unit = "ns";
-                break;
-            case 1:
-                unit = "μs";
-                break;
-            case 2:
-                unit = "ms";
-                break;
-            default:
-                unit = "s";
-                break;
-        }
-        return new DecimalFormat("0.0").format(step) + unit;
-    }
 }
