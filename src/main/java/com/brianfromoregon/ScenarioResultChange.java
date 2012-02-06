@@ -145,13 +145,13 @@ public class ScenarioResultChange {
             case SAME:
                 return SubSecond.finestFor(getNewNanos()).format(getNewNanos());
             default:
-                double pct = Math.abs(getNewNanos() / getOldNanos() - 1);
+                double pct = getNewNanos() / getOldNanos() - 1;
                 String direction;
                 if (pct > 0)
                     direction = "up";
                 else
                     direction = "down";
-                return String.format("%s (%s %s%%)", SubSecond.finestFor(getNewNanos()).format(getNewNanos()), direction, new DecimalFormat("0.0").format(pct * 100));
+                return String.format("%s (%s %s%%)", SubSecond.finestFor(getNewNanos()).format(getNewNanos()), direction, new DecimalFormat("0.0").format(Math.abs(pct) * 100));
         }
     }
 

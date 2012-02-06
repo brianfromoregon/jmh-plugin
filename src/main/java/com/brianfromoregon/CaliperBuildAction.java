@@ -17,9 +17,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * TODO: is this slave friendly?
- */
 public class CaliperBuildAction implements Action {
     private static final Logger LOGGER = Logger.getLogger(CaliperBuildAction.class.getName());
     private final String[] jsonResults;
