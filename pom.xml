@@ -10,7 +10,7 @@
   <groupId>com.brianfromoregon</groupId>
   <artifactId>caliper-ci</artifactId>
   <name>Caliper CI Plugin</name>
-  <version>2.2-SNAPSHOT</version>
+  <version>2.2</version>
   <packaging>hpi</packaging>
 <!-- get every artifact through maven.glassfish.org, which proxies all the artifacts that we need -->
   <repositories>
@@ -63,9 +63,9 @@
   </properties>
   <url>http://code.google.com/p/caliper-ci</url>
   <scm>
-    <connection>scm:svn:https://caliper-ci.googlecode.com/svn/tags/caliper-ci-2.1</connection>
-    <developerConnection>scm:svn:https://caliper-ci.googlecode.com/svn/tags/caliper-ci-2.1</developerConnection>
-    <url>https://caliper-ci.googlecode.com/svn/tags/caliper-ci-2.1</url>
+    <connection>scm:svn:https://caliper-ci.googlecode.com/svn/tags/caliper-ci-2.2</connection>
+    <developerConnection>scm:svn:https://caliper-ci.googlecode.com/svn/tags/caliper-ci-2.2</developerConnection>
+    <url>https://caliper-ci.googlecode.com/svn/tags/caliper-ci-2.2</url>
   </scm>
   <developers>
     <developer>
