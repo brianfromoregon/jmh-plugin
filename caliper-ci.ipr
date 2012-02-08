@@ -418,17 +418,6 @@
         <root url="jar://$MAVEN_REPOSITORY$/com/jcraft/jsch/0.1.38/jsch-0.1.38-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: com.sun.akuma:akuma:1.4">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/akuma/akuma/1.4/akuma-1.4.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/akuma/akuma/1.4/akuma-1.4-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/sun/akuma/akuma/1.4/akuma-1.4-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Maven: com.sun.solaris:embedded_su4j:1.1">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/com/sun/solaris/embedded_su4j/1.1/embedded_su4j-1.1.jar!/" />
@@ -1254,70 +1243,70 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/maven/maven3-interceptor/1.2/maven3-interceptor-1.2-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.jenkins-ci.main:cli:1.424">
+    <library name="Maven: org.jenkins-ci.main:cli:1.424.2">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/cli/1.424/cli-1.424.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/cli/1.424.2/cli-1.424.2.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/cli/1.424/cli-1.424-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/cli/1.424.2/cli-1.424.2-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/cli/1.424/cli-1.424-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/cli/1.424.2/cli-1.424.2-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.jenkins-ci.main:jenkins-core:1.424">
+    <library name="Maven: org.jenkins-ci.main:jenkins-core:1.424.2">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-core/1.424/jenkins-core-1.424.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-core/1.424.2/jenkins-core-1.424.2.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-core/1.424/jenkins-core-1.424-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-core/1.424.2/jenkins-core-1.424.2-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-core/1.424/jenkins-core-1.424-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-core/1.424.2/jenkins-core-1.424.2-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.jenkins-ci.main:jenkins-test-harness:1.424">
+    <library name="Maven: org.jenkins-ci.main:jenkins-test-harness:1.424.2">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-test-harness/1.424/jenkins-test-harness-1.424.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-test-harness/1.424.2/jenkins-test-harness-1.424.2.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-test-harness/1.424/jenkins-test-harness-1.424-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-test-harness/1.424.2/jenkins-test-harness-1.424.2-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-test-harness/1.424/jenkins-test-harness-1.424-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-test-harness/1.424.2/jenkins-test-harness-1.424.2-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.jenkins-ci.main:jenkins-war:war-for-test:1.424">
+    <library name="Maven: org.jenkins-ci.main:jenkins-war:war-for-test:1.424.2">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-war/1.424/jenkins-war-1.424-war-for-test.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-war/1.424.2/jenkins-war-1.424.2-war-for-test.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-war/1.424/jenkins-war-1.424-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-war/1.424.2/jenkins-war-1.424.2-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-war/1.424/jenkins-war-1.424-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-war/1.424.2/jenkins-war-1.424.2-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.jenkins-ci.main:jenkins-war:war:1.424">
+    <library name="Maven: org.jenkins-ci.main:jenkins-war:war:1.424.2">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-war/1.424/jenkins-war-1.424.war!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-war/1.424.2/jenkins-war-1.424.2.war!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-war/1.424/jenkins-war-1.424-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-war/1.424.2/jenkins-war-1.424.2-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-war/1.424/jenkins-war-1.424-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/jenkins-war/1.424.2/jenkins-war-1.424.2-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.jenkins-ci.main:maven-plugin:1.424">
+    <library name="Maven: org.jenkins-ci.main:maven-plugin:1.424.2">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/maven-plugin/1.424/maven-plugin-1.424.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/maven-plugin/1.424.2/maven-plugin-1.424.2.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/maven-plugin/1.424/maven-plugin-1.424-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/maven-plugin/1.424.2/maven-plugin-1.424.2-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/maven-plugin/1.424/maven-plugin-1.424-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/maven-plugin/1.424.2/maven-plugin-1.424.2-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.jenkins-ci.main:remoting:2.4">
@@ -1331,15 +1320,15 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/remoting/2.4/remoting-2.4-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.jenkins-ci.main:ui-samples-plugin:1.424">
+    <library name="Maven: org.jenkins-ci.main:ui-samples-plugin:1.424.2">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/ui-samples-plugin/1.424/ui-samples-plugin-1.424.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/ui-samples-plugin/1.424.2/ui-samples-plugin-1.424.2.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/ui-samples-plugin/1.424/ui-samples-plugin-1.424-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/ui-samples-plugin/1.424.2/ui-samples-plugin-1.424.2-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/ui-samples-plugin/1.424/ui-samples-plugin-1.424-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/main/ui-samples-plugin/1.424.2/ui-samples-plugin-1.424.2-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.jenkins-ci.modules:instance-identity:1.1">
@@ -1408,15 +1397,15 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/crypto-util/1.1/crypto-util-1.1-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.jenkins-ci:htmlunit:2.6-jenkins-4">
+    <library name="Maven: org.jenkins-ci:htmlunit:2.6-jenkins-5">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/htmlunit/2.6-jenkins-4/htmlunit-2.6-jenkins-4.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/htmlunit/2.6-jenkins-5/htmlunit-2.6-jenkins-5.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/htmlunit/2.6-jenkins-4/htmlunit-2.6-jenkins-4-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/htmlunit/2.6-jenkins-5/htmlunit-2.6-jenkins-5-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/htmlunit/2.6-jenkins-4/htmlunit-2.6-jenkins-4-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/jenkins-ci/htmlunit/2.6-jenkins-5/htmlunit-2.6-jenkins-5-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.jenkins-ci:jinterop-wmi:1.1">
@@ -1826,6 +1815,17 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/kohsuke/access-modifier-annotation/1.0/access-modifier-annotation-1.0-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: org.kohsuke:akuma:1.7">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/kohsuke/akuma/1.7/akuma-1.7.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/kohsuke/akuma/1.7/akuma-1.7-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/kohsuke/akuma/1.7/akuma-1.7-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: org.kohsuke:trilead-putty-extension:1.0">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/org/kohsuke/trilead-putty-extension/1.0/trilead-putty-extension-1.0.jar!/" />
@@ -2176,6 +2176,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/xerces/xercesImpl/2.9.1/xercesImpl-2.9.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: xml-apis:xml-apis:1.3.04">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: xpp3:xpp3:1.1.4c">
