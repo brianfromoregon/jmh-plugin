@@ -21,6 +21,7 @@ import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -35,11 +36,20 @@ public class CaliperResultsRecorder extends Recorder {
     private static final Logger LOGGER = Logger.getLogger(CaliperResultsRecorder.class.getName());
 
     //{@link FileSet} "includes" string, like "foo/bar/*.json"
-    private final String results;
+    public final String results;
+    // Ex. http://microbenchmarks.appspot.com:80/run/
+    public final String postUrl;
+    // Ex. c9a93074-5752-405d-b126-c85a7221286b
+    public final String apiKey;
+    // Ex. myproxy:8080
+    public final String proxyHostPort;
 
     @DataBoundConstructor
-    public CaliperResultsRecorder(String results) {
-        this.results = results;
+    public CaliperResultsRecorder(String results, String postUrl, String apiKey, String proxyHostPort) {
+        this.results = results.trim();
+        this.postUrl = postUrl.trim();
+        this.apiKey = apiKey.trim();
+        this.proxyHostPort = proxyHostPort.trim();
     }
 
     @Override
@@ -54,7 +64,7 @@ public class CaliperResultsRecorder extends Recorder {
             return false;
         }
 
-        List<Result> results = Lists.newArrayList();
+        List<Result> results = new ArrayList<>(); // my first ever use of java7 language feature :)
         Iterator<ParsedFile> it = jsonResults.iterator();
         while (it.hasNext()) {
             ParsedFile f = it.next();
@@ -72,7 +82,6 @@ public class CaliperResultsRecorder extends Recorder {
                 listener.getLogger().println("Could not parse file as JSON (see logs for details), skipping: " + f.name);
                 LOGGER.log(Level.WARNING, "Could not parse file as JSON, skipping: " + f.name, e);
                 it.remove();
-                continue;
             }
         }
 
@@ -81,7 +90,7 @@ public class CaliperResultsRecorder extends Recorder {
             return false;
         }
 
-        addBuildAction(build, Lists.transform(jsonResults, new Function<ParsedFile, String>() {
+        addBuildAction(build, listener, Lists.transform(jsonResults, new Function<ParsedFile, String>() {
             @Override
             public String apply(ParsedFile input) {
                 return input.content;
@@ -132,10 +141,20 @@ public class CaliperResultsRecorder extends Recorder {
         return readFiles;
     }
 
-    void addBuildAction(AbstractBuild<?, ?> build, List<String> jsonResults) {
+    void addBuildAction(AbstractBuild<?, ?> build, BuildListener listener, List<String> jsonResults) {
         CaliperBuildAction action = new CaliperBuildAction(jsonResults.toArray(new String[jsonResults.size()]), build);
         build.addAction(action);
 
+        // Upload results here
+        if (!postUrl.isEmpty() && !apiKey.isEmpty()) {
+            ResultUploader uploader = new ResultUploader();
+            for (Result result : action.jsonToResults()) {
+                listener.getLogger().printf("Uploading result for benchmark '%s' to '%s'\n", result.getRun().getBenchmarkName(), postUrl);
+                listener.getLogger().println("Outcome: " + uploader.postResults(result, postUrl, apiKey, proxyHostPort));
+            }
+        }
+
+        // Fail build here
         if (action.getResultDifference().getNumMemoryRegressions() > 0) {
             build.setResult(hudson.model.Result.UNSTABLE);
         }

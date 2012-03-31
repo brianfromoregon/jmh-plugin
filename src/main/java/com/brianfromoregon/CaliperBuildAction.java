@@ -81,6 +81,18 @@ public class CaliperBuildAction implements Action {
         return new BuildResultDifference(prevResults, results);
     }
 
+    public List<Result> jsonToResults() {
+        List<Result> caliperResults = Lists.newArrayList();
+        for (String r : jsonResults) {
+            try {
+                caliperResults.add(Json.getGsonInstance().fromJson(r, Result.class));
+            } catch (JsonSyntaxException e) {
+                LOGGER.log(Level.SEVERE, "Could not parse Caliper result file as JSON, skipping", e);
+            }
+        }
+        return caliperResults;
+    }
+
     public BuildResults getResults() {
         return results;
     }
@@ -112,15 +124,7 @@ public class CaliperBuildAction implements Action {
     }
 
     private void initResults() {
-        List<Result> caliperResults = Lists.newArrayList();
-        for (String r : jsonResults) {
-            try {
-                caliperResults.add(Json.getGsonInstance().fromJson(r, Result.class));
-            } catch (JsonSyntaxException e) {
-                LOGGER.log(Level.SEVERE, "Could not parse Caliper result file as JSON, skipping", e);
-            }
-        }
-        results = new BuildResults(caliperResults);
+        results = new BuildResults(jsonToResults());
         trendsById = Maps.newHashMap();
         int id = 0;
         for (ScenarioKey key : results.getScenarios().keySet()) {

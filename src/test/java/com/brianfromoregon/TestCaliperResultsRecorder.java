@@ -10,13 +10,13 @@ import hudson.model.BuildListener;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.mock;
 
 public class TestCaliperResultsRecorder {
 
@@ -38,7 +38,7 @@ public class TestCaliperResultsRecorder {
         launcher = null;
         inputResults = Lists.newArrayList();
         outputResults = Lists.newArrayList();
-        instance = new CaliperResultsRecorder("") {
+        instance = new CaliperResultsRecorder("", "", "", "") {
             @Override
             List<ParsedFile> readUtf8Results(AbstractBuild<?, ?> build) throws IOException, InterruptedException {
                 return Lists.transform(inputResults, new Function<String, ParsedFile>() {
@@ -50,7 +50,7 @@ public class TestCaliperResultsRecorder {
             }
 
             @Override
-            void addBuildAction(AbstractBuild<?, ?> build, List<String> jsonResults) {
+            void addBuildAction(AbstractBuild<?, ?> build, BuildListener listener, List<String> jsonResults) {
                 outputResults.addAll(jsonResults);
             }
         };
