@@ -10,7 +10,7 @@
     <groupId>com.brianfromoregon</groupId>
     <artifactId>caliper-ci</artifactId>
     <name>Caliper CI Plugin</name>
-    <version>2.2</version>
+    <version>2.3-SNAPSHOT</version>
     <packaging>hpi</packaging>
     <dependencies>
         <dependency>
@@ -50,9 +50,9 @@
     </properties>
     <url>http://code.google.com/p/caliper-ci</url>
     <scm>
-        <connection>scm:svn:https://caliper-ci.googlecode.com/svn/tags/caliper-ci-2.2</connection>
-        <developerConnection>scm:svn:https://caliper-ci.googlecode.com/svn/tags/caliper-ci-2.2</developerConnection>
-        <url>http://code.google.com/p/caliper-ci/source/browse/tags/caliper-ci-2.2</url>
+        <connection>scm:svn:https://caliper-ci.googlecode.com/svn/trunk</connection>
+        <developerConnection>scm:svn:https://caliper-ci.googlecode.com/svn/trunk</developerConnection>
+        <url>http://code.google.com/p/caliper-ci/source/browse</url>
     </scm>
     <developers>
         <developer>
