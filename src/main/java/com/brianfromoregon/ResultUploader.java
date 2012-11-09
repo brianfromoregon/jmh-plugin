@@ -22,20 +22,26 @@ public class ResultUploader {
             String resultJson = Json.getGsonInstance().toJson(result);
             urlConnection.getOutputStream().write(resultJson.getBytes());
             if (urlConnection.getResponseCode() == 200) {
-                try (BufferedReader in = new BufferedReader(
-                        new InputStreamReader(urlConnection.getInputStream()))) {
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(urlConnection.getInputStream()));
+                try {
                     return in.readLine();
+                } finally {
+                    in.close();
                 }
             }
 
             StringBuilder err = new StringBuilder();
             err.append("Posting to ").append(postUrl).append(" failed: ").append(urlConnection.getResponseMessage());
-            try (BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(urlConnection.getInputStream()))) {
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(urlConnection.getInputStream()));
+            try {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     err.append("\n").append(line);
                 }
+            } finally {
+                reader.close();
             }
             return err.toString();
         } catch (Exception e) {

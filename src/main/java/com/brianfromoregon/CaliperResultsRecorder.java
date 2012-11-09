@@ -64,7 +64,7 @@ public class CaliperResultsRecorder extends Recorder {
             return false;
         }
 
-        List<Result> results = new ArrayList<>(); // my first ever use of java7 language feature :)
+        List<Result> results = new ArrayList<Result>();
         Iterator<ParsedFile> it = jsonResults.iterator();
         while (it.hasNext()) {
             ParsedFile f = it.next();
