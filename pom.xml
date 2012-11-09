@@ -49,11 +49,11 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <url>http://code.google.com/p/caliper-ci</url>
+    <url>http://github.com/jenkinsci/${project.artifactId}-plugin</url>
     <scm>
-        <connection>scm:svn:https://caliper-ci.googlecode.com/svn/trunk</connection>
-        <developerConnection>scm:svn:https://caliper-ci.googlecode.com/svn/trunk</developerConnection>
-        <url>http://code.google.com/p/caliper-ci/source/browse</url>
+        <connection>scm:git:git://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
+        <url>http://github.com/jenkinsci/${project.artifactId}-plugin</url>
     </scm>
     <developers>
         <developer>
