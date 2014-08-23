@@ -8,9 +8,9 @@
         <!-- LTS release -->
     </parent>
     <groupId>com.brianfromoregon</groupId>
-    <artifactId>caliper-ci</artifactId>
-    <name>Caliper CI Plugin</name>
-    <version>2.4-SNAPSHOT</version>
+    <artifactId>jmh-plugin</artifactId>
+    <name>JMH Plugin</name>
+    <version>1.0-SNAPSHOT</version>
     <packaging>hpi</packaging>
     <dependencies>
         <dependency>
@@ -48,11 +48,11 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <url>https://code.google.com/p/caliper-ci/</url>
+    <url>https://github.com/brianfromoregon/jmh-plugin</url>
     <scm>
-        <connection>scm:git:ssh://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/jenkinsci/${project.artifactId}-plugin.git</developerConnection>
-        <url>http://github.com/jenkinsci/${project.artifactId}-plugin</url>
+        <connection>scm:git:ssh://github.com/brianfromoregon/${project.artifactId}.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/brianfromoregon/${project.artifactId}.git</developerConnection>
+        <url>http://github.com/brianfromoregon/${project.artifactId}</url>
     </scm>
     <developers>
         <developer>
@@ -69,8 +69,8 @@
         </license>
     </licenses>
     <issueManagement>
-        <system>Google Code Issue Tracking</system>
-        <url>http://code.google.com/p/caliper-ci/issues</url>
+        <system>GitHub</system>
+        <url>http://github.com/brianfromoregon/${project.artifactId}/issues</url>
     </issueManagement>
     <repositories>
         <repository>

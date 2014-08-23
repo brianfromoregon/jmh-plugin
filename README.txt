@@ -1,1 +1,1 @@
-Copied caliper sources are from r356
+Jenkins plugin for [jmh](http://openjdk.java.net/projects/code-tools/jmh)
