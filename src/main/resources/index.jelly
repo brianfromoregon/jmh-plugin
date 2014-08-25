@@ -2,5 +2,5 @@
   This view is used to render the installed plugins page.
 -->
 <div>
-  This plugin collects Caliper microbenchmark results.
+  This plugin collects and publishes JMH benchmark results.
 </div>
