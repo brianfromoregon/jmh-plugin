@@ -7,6 +7,7 @@ import com.google.common.collect.ImmutableMap.Builder;
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
 
+import java.util.Map;
 import java.util.logging.Logger;
 
 import static com.google.common.collect.Lists.transform;
@@ -27,15 +28,10 @@ public class BuildAction implements Action {
     }
 
     /**
-     * /jmh/file/name
+     * /jmh/files
      */
-    public String getFile(String name) {
-        CollectedFile file = resultsByName.get(name);
-        if (file == null) {
-            return null;
-        }
-
-        return file.content;
+    public Map<String, CollectedFile> getFiles() {
+        return resultsByName;
     }
 
     /**
@@ -54,7 +50,7 @@ public class BuildAction implements Action {
             list.addAll(transform(buildAction.results, new Function<CollectedFile, PublishedFile>() {
                 @Override
                 public PublishedFile apply(CollectedFile collectedFile) {
-                    String url = format("%sjmh/file/%s", buildUrl, collectedFile.name());
+                    String url = format("%sjmh/files/%s", buildUrl, collectedFile.name());
                     return new PublishedFile(collectedFile, url);
                 }
             }));
@@ -67,13 +63,13 @@ public class BuildAction implements Action {
      */
     public String getSummary() {
         return format("Collected %d result file%s",
-                results,
+                results.size(),
                 results.size() == 1 ? "" : "s");
     }
 
     @Override
     public String getIconFileName() {
-        return "/plugin/caliper-ci/caliper.png";
+        return "/plugin/jmh-plugin/shipilev.jpg";
     }
 
     @Override

@@ -2,7 +2,7 @@
          xmlns:t="/lib/hudson" xmlns:f="/lib/form">
 
     <f:entry title="Result files" field="results" description="${%description}">
-        <f:textbox default="*.jmh.json"/>
+        <f:textbox default="**/*.jmh.json"/>
     </f:entry>
 
 </j:jelly>

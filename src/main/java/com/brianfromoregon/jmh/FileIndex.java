@@ -3,6 +3,8 @@ package com.brianfromoregon.jmh;
 import au.com.bytecode.opencsv.CSVWriter;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
+import org.jfree.chart.ChartRenderingInfo;
+import org.jfree.chart.ChartUtilities;
 import org.kohsuke.stapler.HttpResponse;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -15,7 +17,7 @@ import static com.google.common.collect.Lists.transform;
 /**
  *
  */
-public class FileIndex implements HttpResponse {
+public class FileIndex {
     // In order, older build results first
     final ImmutableList<PublishedFile> results;
 
@@ -23,11 +25,9 @@ public class FileIndex implements HttpResponse {
         this.results = results;
     }
 
-    @Override
-    public void generateResponse(StaplerRequest req, StaplerResponse res, Object o) throws IOException, ServletException {
-        // TODO support other result types
-//        String type = req.getParameter("type");
-        CSVWriter writer = new CSVWriter(res.getWriter());
+    public void doIndex(StaplerRequest req, StaplerResponse rsp) throws IOException {
+        rsp.setContentType("text/csv");
+        CSVWriter writer = new CSVWriter(rsp.getWriter());
         writer.writeNext(new String[] {"url", "path"});
         writer.writeAll(transform(results, new Function<PublishedFile, String[]>() {
             @Override
@@ -39,4 +39,5 @@ public class FileIndex implements HttpResponse {
             }
         }));
     }
+
 }

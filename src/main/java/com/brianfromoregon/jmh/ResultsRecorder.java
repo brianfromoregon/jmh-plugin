@@ -19,6 +19,8 @@ import org.kohsuke.stapler.DataBoundConstructor;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import static org.apache.commons.lang.StringUtils.strip;
+
 /**
  * This is my "Post Build Action" which finds result files, stores them, and adds an action to the build.
  * <p/>
@@ -63,15 +65,17 @@ public class ResultsRecorder extends Recorder {
         }
 
         public String getDisplayName() {
-            return "Publish JMH microbenchmark results";
+            return "Publish JMH benchmark results";
         }
     }
 
     private ImmutableList<CollectedFile> readUtf8Results(AbstractBuild<?, ?> build) throws IOException, InterruptedException {
+        String workspace = build.getWorkspace().getRemote();
         Builder<CollectedFile> list = ImmutableList.builder();
         for (FilePath f : build.getWorkspace().list(results)) {
             String content = CharStreams.toString(new InputStreamReader(f.read(), Charsets.UTF_8));
-            list.add(new CollectedFile(f.getRemote(), content));
+            String name = strip(f.getRemote().substring(workspace.length()).replace('\\', '/'), "/");
+            list.add(new CollectedFile(name, content));
         }
         return list.build();
     }
